@@ -122,10 +122,12 @@ header{
   text-align: center;
   width:30%;
   padding:10px;
+  
 }
 
 #boxes .box img{
   width:90px;
+  height:90px;
 }
 
 footer{
@@ -135,7 +137,7 @@ footer{
   background-color:#61ADF0;
   text-align:center;
 }
-
+ 
    
    
    
