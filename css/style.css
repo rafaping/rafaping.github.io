@@ -2,7 +2,7 @@ body{
     font: 15px/1.5 Arial, Helvetica, sans-serif;
     padding:0;
     margin:0;
-    background-color: #f4f4f4
+    background-color: #e06660
 }
 
 /* Global */
@@ -82,7 +82,7 @@ header{
   /* Showcase */
 #showcase{
   min-height:400px;
-  background:url('../img/showcase.jpg');
+  background:url('../img/crown.png');
   background-repeat: no-repeat;
   background-size:cover;
   text-align:center;
@@ -93,11 +93,23 @@ header{
   margin-top:100px;
   font-size:55px;
   margin-bottom:10px;
+text-shadow:
+-1px -1px 0 #000,
+1px -1px 0 #000,
+-1px 1px 0 #000,
+1px 1px 0 #000;
 }
+
 
 #showcase p{
   font-size:20px;
+text-shadow:
+-1px -1px 0 #000,
+1px -1px 0 #000,
+-1px 1px 0 #000,
+1px 1px 0 #000;
 }
+
    
 #newsletter{
     padding:15px;
