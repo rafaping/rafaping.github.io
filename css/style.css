@@ -217,6 +217,63 @@ footer{
     width:100%;
     margin-bottom:5px;
   }
+  
+  /* Boxes */
+  
+#boxes{
+  margin-top:20px;
+}
+
+#boxes.box{
+  float:left;
+  text-align: center;
+  width:30%;
+  padding:10px;
+  
+}
+
+#boxes.box img{
+  width:90px;
+  height:90px;
+}
+
+#boxes{
+	margin-top:0px;
+	color: #C5B358;
+}
+
+.box a:hover{
+	color:#C5B358;
+	font-weight:bold;
+}
+.box :hover{
+	color:#ffffff;
+	font-weight:bold;
+}
+
+
+.box{
+	float:left;
+	text-align:center;
+	width:25.33%;
+	padding:4%;
+}
+
+.box{
+	text-decoration: None
+	color:#C5B358;
+}
+#boxes .box img{
+	height:225px;
+	width: 100%;
+}
+
+/* Sidebar */
+#sidebar{
+  float:right;
+  width:30%;
+  margin-top:10px;
+}
 
 
 
