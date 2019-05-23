@@ -1,0 +1,123 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Processing Demo</title>
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+<body>
+<script type="text/processing">
+/**
+* @Author: Rafael Ponce De Leon
+* @Version: #1.0 + May 13th, 2019
+*/
+PImage bg;//background
+int w=0;
+PImage th;//thanos 
+int x=100;
+int y=200;
+PImage p; // Cap's Sheild
+int px;
+int py;
+int Vy=2; //Velocity x
+int Vx=2; //Velocity y
+int r=50; //Radius
+int gameOver;//Ends the game when you crash
+int score=0; //Score
+int highScore=0;
+void setup(){
+  size(600,500);
+  bg = loadImage(".img/bgg.jpg"); //background 
+  th = loadImage(".img/game/dd.png");//Thanos
+  p = loadImage(".img/capsh.png");// Captain America's sheild
+  px = 800;
+  py =120;
+  gameOver=0;
+}
+
+
+void draw() {
+  if(gameOver==0){
+    image(bg, w, -200);
+    image(bg, w+bg.width, -200); 
+    
+    image(p, px, py);//Cap sheild
+    w--;
+    image(th,x,y);//thanos
+    Vx--;
+    Vy++; 
+    y=y+Vy;
+    px-= 5;
+    if(px < -200){   //reset px when it reaches the end
+      px =800;
+      py = (int)random(100,400);//Cap's sheild appears randomly 
+    }
+     if(y < -100 ){ // Death from going off the top of scren
+        fill(0); //Black
+        text("Thor cut your head off!", width/2 - 100, height/2);
+         gameOver = 1;
+         
+        
+     }
+      
+     if(px == 800) { //Score adds
+       score++;
+     
+     }
+     textSize(32); //score board
+     text("score:"+score,10,25);
+     
+     if( score > 4 ){//speed of sheild
+       px -=7;
+     }
+     
+     if( score > 9 ){//speed of sheild
+       px -=10;
+     }
+     
+     if( score > 12 ){//speed of sheild
+       px -=13;
+     }
+     
+  
+    checkWalls();
+    checkImage();
+    checkCollision();
+  }
+}
+
+void checkWalls(){
+  if( y>height){//death if low
+    Vy=Vy*1;
+    gameOver=1;
+    fill(0);
+    text("Iron Man snapped his fingers!", 100,300);
+    
+  }
+  
+}
+
+void mousePressed(){//when you press the mouse you flap up
+  if(mousePressed){
+    Vy=-15;
+  
+  }
+}
+
+void checkImage(){
+  if(w<-bg.width){
+  w=0; //Reset background to beginning
+ }
+}
+
+void checkCollision(){ //collision to cap sheild
+  if(abs(x-px)<40&&abs(y-py)<40){
+    gameOver=1;
+    text("Captain America has slained you!",50,250);
+  }
+}
+
+</script>
+<canvas id="sketch" style="border: 1px solid black;"></canvas>
+</body>
+</html>
