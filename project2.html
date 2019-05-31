@@ -1,0 +1,262 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Processing Demo</title>
+<script type="text/javascript" src="processing.js"></script>
+</head>
+<body>
+<script type="text/processing">
+/** 
+ *
+ *@Author: Rafael Ponce De Leon
+ *@Version:1.0 May 23rd, 2019
+ */
+
+PImage Menu;
+PImage floor;
+PImage Loser;
+String gameState;
+int ax = 800; //x position of bad circle
+int ay=50;//y position of bad circle
+int bx = 800;//x position of bad circle
+int by=120;//y position of bad circle
+int cx = 800;//x position of bad circle
+int cy=550;//y position of bad circle
+int dx = 800;//x position of bad circle
+int dy=550;//y position of bad circle
+int ex = 800;//x position of bad circle
+int ey=550;//y position of bad circle
+int fx = 800;//x position of bad circle
+int fy=550;//y position of bad circle
+int gx=800;//x position of bad circle
+int gy=100;//y position of bad circle
+int hx=100;//x position of bad circle 
+int hy=50;//y position
+int vhx=7;// x velocity of hx
+int vhy=9;// y velocity of hy
+int hr=30;// radius of h circle
+int ix=550;//x position of bad circle
+int iy=550;// y postion of bad circle
+int vix=10;// x velocity of hx
+int viy=10;// y velocity of hy
+int ir=30;// radius of h circle
+int x =20;//size all of bad circle
+int y=20;//size all of bad circle
+int score=0; //score
+void setup() {
+  size(600, 600);
+  gameState = "START";
+  Menu = loadImage("./img/MainMenu.png");//Menu
+  floor = loadImage("./img/woodfloor.png");//Background
+  Loser = loadImage("./img/loser.png");//loser picture
+}
+
+
+void draw() {
+  clearBackground();
+  if (gameState == "START") { //Starting screen
+    startGame();
+  } else if (gameState == "PLAY") { //Actually play game
+    playGame();
+    fill(255, 0, 0);
+    ellipse(ax, ay, x, y);
+    ellipse(bx, by, x, y);
+    ellipse(cx, cy, x, y);
+    ellipse(dx, dy, x, y);
+    ellipse(ex, ey, x, y);
+    ellipse(fx, fy, x, y);
+    ellipse(gx, gy, x, y);
+    fill(155, 7, 7);
+    circle(hx, hy, hr);
+    circle(ix,iy,ir);
+    ax-=5; // bad circle x velocity
+    bx-=6; // bad circle x velocity
+    cx-=7; // bad circle x velocity
+    dx-=8; // bad circle x velocity
+    ex-=5; // bad circle x velocity
+    fx-=10; // bad circle x velocity
+    gx-=9; // bad circle x velocity
+    hx = hx + vhx; 
+    hy = hy + vhy; 
+    ix = ix + vix; 
+    iy = iy + viy;
+    
+    if (ax < -200) {   //reset bad circle when it reaches the end
+      ax =800;
+      ay = (int)random(100, 550);//bad circle appears randomly
+    }
+    if (bx < -200) {   //reset bad circle when it reaches the end
+      bx =800;
+      by = (int)random(100, 550);//bad circle appears randomly
+    }
+    if (cx < -200) {   //reset bad circle when it reaches the end
+      cx =800;
+      cy = (int)random(100, 550);//bad circle appears randomly
+    }
+    if (dx < -200) {   //reset bad circle when it reaches the end
+      dx =800;
+      dy = (int)random(100, 550);//bad circle appears randomly
+    }
+    if (ex < -200) {   //reset bad circle when it reaches the end
+      ex =800;
+      ey = (int)random(100, 550);//bad circle appears randomly
+    }
+    if (fx < -200) {   //reset bad circle when it reaches the end
+      fx =800;
+      fy = (int)random(100, 550);//bad circle appears randomly
+    }
+    if (gx < -200) {   //reset bad circle when it reaches the end
+      gx =800;
+      gy = (int)random(100, 550);//bad circle appears randomly
+    }
+    if (ax == 800) { //Score adds
+      score++;
+    }
+    if (bx == 800) { //Score adds
+      score++;
+    }
+    if (cx == 800) { //Score adds
+      score++;
+    }
+    if (dx == 800) { //Score adds
+      score++;
+    }
+    if (ex == 800) { //Score adds
+      score++;
+    }
+    if (fx == 800) { //Score adds
+      score++;
+    }
+    if (gx == 800) { //Score adds
+      score++;
+    }
+    textSize(16); //score board
+    text("score:"+score, 50, 25);
+  } else if (gameState =="WIN") { //Win
+    winGame();
+  } else if (gameState == "LOSE") { //Lose
+    loseGame();
+  }
+}
+
+void startGame() { //menu screen
+  textAlign(CENTER);
+  image(Menu, 0, 0);
+  fill(0);
+  text("Use the mouse to doge the red circles.", 300, 100);
+  if (mousePressed == true) {
+    gameState =  "PLAY";
+  }
+}
+void playGame() {//code when playing game
+  image(floor, 0, 0);
+  fill(0, 255, 0);
+  ellipse(mouseX, mouseY, 50, 50);
+
+  if (score>99) {
+    gameState="WIN";
+    score=0;
+  }
+  if (mouseX <10) { //die by going to far to left side 
+    gameState = "LOSE";
+  }
+  if (mouseY <10) {//die by going to far to up
+    gameState = "LOSE";
+  }
+  if (mouseY >590) {//die by going to far to down
+    gameState = "LOSE";
+  }
+  if (abs(mouseX-ax)<20&&abs(mouseY-ay)<20) { //collision: lose if touched by bad circle  
+    gameState="LOSE";
+  }
+  if (abs(mouseX-bx)<20&&abs(mouseY-by)<20) {//collision: lose if touched by bad circle 
+    gameState="LOSE";
+  }
+  if (abs(mouseX-cx)<20&&abs(mouseY-cy)<20) {//collision: lose if touched by bad circle
+    gameState="LOSE";
+  }
+  if (abs(mouseX-dx)<20&&abs(mouseY-dy)<20) {//collision: lose if touched by bad circle
+    gameState="LOSE";
+  }
+  if (abs(mouseX-ex)<20&&abs(mouseY-ey)<20) {//collision: lose if touched by bad circle
+    gameState="LOSE";
+  } 
+  if (abs(mouseX-fx)<20&&abs(mouseY-fy)<20) {//collision: lose if touched by bad circle
+    gameState="LOSE";
+  }
+  if (abs(mouseX-hx)<hr&&abs(mouseY-hy)<hr) {//collision: lose if touched by bad circle
+    gameState="LOSE";
+  }
+  if (abs(mouseX-ix)<ir&&abs(mouseY-iy)<ir) {//collision: lose if touched by bad circle
+    gameState="LOSE";
+  }
+  if (hy>height || hy<0) { //bounce
+    vhy=vhy*-1;
+  }
+  if (hx>width || hx<0) { //bounce
+    vhx=vhx*-1;
+  }
+  if (iy>height || iy<0) {//bounce
+    viy=viy*-1;
+  }
+  if (ix>width || ix<0) { //bounce
+    vix=vix*-1;
+  }
+ 
+}
+
+void winGame() { //win in-game screen
+  fill(255, 255, 0);
+  rect(0, 0, width, height);
+  fill(0);
+  textSize(35);
+  text("CONGRATS YOU WIN!!!\nPlay Again?", width/2, height/2);
+  fill(200);
+  rect(250, 375, 100, 60, 10);
+  fill(0, 255, 0);
+  textSize(25);
+  text("AGAIN?", width/2, 410);
+  if (mousePressed==true&&mouseX>250 && mouseX<350 && mouseY>380 && mouseY<440 ) { //rest button
+    gameState="PLAY"; 
+    score=0;
+  }
+}
+void loseGame() { //lose in game screen
+  background(0);
+  image(Loser, 100, 100);
+  fill(255, 255, 255);
+  textSize(25);
+  text("AWWWW GOOD ATTEMPT!", width/2, height/2);
+  fill(255);
+  if (mouseX > 200 && mouseX < 400 && mouseY > 200 && mouseY < 250) {
+    fill(120);
+  }
+  fill(79, 255, 100);
+  rect(250, 375, 100, 60, 10);
+  fill(255, 0, 0);
+  textSize(35);
+  if (mouseX > 250 && mouseX < 350 && mouseY > 380 && mouseY < 440) {
+    fill(0, 0, 255); //Change to BLUE IF Mouse X and MouseY are in RECT
+    if (mousePressed) {
+      textSize(42); //WHEN CLICKED MAKES THE TEXT SIZE BIGGER
+    }
+  }
+  textSize(12);
+  text("PLAY AGAIN?", 300, 415);
+  if (mousePressed==true&&mouseX>250 && mouseX<350 && mouseY>380 && mouseY<440 ) { //rest button
+    gameState="PLAY";
+    score=0;
+  }
+}
+void resetGame() { // rest game
+}
+
+
+void clearBackground() { //Clear background after each gamstate
+  fill(255); 
+  rect(0, 0, width, height);
+}
+</script>
+<canvas id="sketch" style="border: 1px solid black;"></canvas>
+</body>
+</html>
