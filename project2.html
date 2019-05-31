@@ -67,8 +67,8 @@ void draw() {
     ellipse(fx, fy, x, y);
     ellipse(gx, gy, x, y);
     fill(155, 7, 7);
-    circle(hx, hy, hr);
-    circle(ix,iy,ir);
+    ellipse(hx, hy, hr, hr);
+    ellipse(ix,iy,ir, ir);
     ax-=5; // bad circle x velocity
     bx-=6; // bad circle x velocity
     cx-=7; // bad circle x velocity
@@ -151,7 +151,7 @@ void startGame() { //menu screen
 void playGame() {//code when playing game
   image(floor, 0, 0);
   fill(0, 255, 0);
-  ellipse(mouseX, mouseY, 50, 50);
+  ellipse(mouseX, mouseY, 50, 50);//you as green circle
 
   if (score>99) {
     gameState="WIN";
